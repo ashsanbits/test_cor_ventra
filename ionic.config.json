@@ -1,0 +1,7 @@
+{
+  "name": "ventra_cordova_app",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}
