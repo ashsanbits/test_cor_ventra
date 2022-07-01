@@ -1,17 +1,32 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 2
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<!-- <ion-header [translucent]="true">
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>List View</ion-title>
+    </ion-toolbar>
+</ion-header> -->
+<app-explore-container name="List View"></app-explore-container>
+
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 2</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
-  <app-explore-container name="Tab 2 page"></app-explore-container>
+    <ion-segment [(ngModel)]="segment" (ionChange)="segmentChanged($event.detail.value)">
+        <ion-segment-button value="online">
+            <ion-label>Online</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="offline">
+            <ion-label>Offline</ion-label>
+        </ion-segment-button>
+    </ion-segment>
+    <div class="ion-padding" *ngIf="devices">
+        <ion-searchbar mode="ios" placeholder="Search Device ID" (ionInput)="search($event)" (ionClear)="onClear($event)"></ion-searchbar>
+        <div *ngFor="let device of devices">
+            <ion-item detail (click)="deviceDetail(device)" *ngIf="device">
+                <ion-label>
+                    <h3>{{device.drivername != "" ? device.drivername : device.deviceid}}</h3>
+                    <p>{{device.updatetime | date:'short'}}</p>
+                </ion-label>
+            </ion-item>
+        </div>
+    </div>
 </ion-content>

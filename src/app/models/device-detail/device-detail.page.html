@@ -1,0 +1,126 @@
+<!-- <ion-header>
+    <ion-toolbar color="primary">
+        <ion-title slot="start">
+            <ion-select interface="popover" [(ngModel)]="ngVal">
+                <ion-select-option value="1">{{device.drivername}}</ion-select-option>
+                <ion-select-option>{{device.deviceid}}</ion-select-option>
+                <ion-select-option>{{device.vehicleid}}</ion-select-option>
+            </ion-select>
+        </ion-title>
+        <ion-buttons slot="end" (click)="closeModal()">
+            <ion-icon name="close"></ion-icon>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header> -->
+<div class="navbar radius-bottom navbar-default navbar-highlight navbar-home">
+    <div class="left">
+        <ion-title slot="start">
+            <ion-select interface="popover" [(ngModel)]="ngVal" style="color: white;">
+                <ion-select-option value="1">{{device.drivername}}</ion-select-option>
+                <ion-select-option>{{device.deviceid}}</ion-select-option>
+                <ion-select-option>{{device.vehicleid}}</ion-select-option>
+            </ion-select>
+        </ion-title>
+    </div>
+    <div class="right">
+        <div class="toggle-icon-app"></div>
+        <div class="mode-text">
+            <ion-buttons slot="end" (click)="closeModal()">
+                <ion-icon class="icon" name="close"></ion-icon>
+            </ion-buttons>
+        </div>
+    </div>
+</div>
+
+<ion-content class="ion-padding">
+    <div>
+        <ion-item>
+            <ion-label>Channels</ion-label>
+            <ion-select interface="popover" value="all" okText="Okay" cancelText="Dismiss" (ionChange)="changeChannel($event.detail.value)">
+                <ion-select-option value="all">All Channels</ion-select-option>
+                <ion-select-option *ngFor="let item of channels" value="{{item}}">Channel {{item}}</ion-select-option>
+            </ion-select>
+        </ion-item>
+        <div *ngIf="channels.length > 0 && device.status !=0">
+            <iframe [src]="url" allow="fullscreen" style="width: 100%;height: 250px;"></iframe>
+            <hr>
+        </div>
+        <div>
+            <div class="row">
+                <div class="col-4">
+                    <h5 class="text-danger">Speed</h5>
+                </div>
+                <div class="col-8">
+                    <h5 class="text-danger">Direction</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <h6 *ngIf="speed_unit == 'mph'">
+                        <span style="margin:0px;font-size:30px;color:grey">{{speedInMph.toFixed(2)}} </span>MPH
+                    </h6>
+                    <h6 *ngIf="speed_unit == 'kmh'">
+                        <span style="margin:0px;font-size:30px;color:grey">{{speedInKph.toFixed(2)}} </span> KMH
+                    </h6>
+                </div>
+                <div class="col-8">
+                    <h6 *ngIf="device.gpsdata"><span style="margin:0px;font-size:30px;color:grey;">{{angle}}</span></h6>
+                    <h6 *ngIf="!device.gpsdata"><span style="margin:0px;font-size:30px;color:grey;">N/A</span></h6>
+                </div>
+
+            </div>
+
+            <!-- <div class="row">
+                <div class="d-inline">
+                    <canvas id="speedsss" data-type="radial-gauge" data-width="120" data-height="120" data-units="mph" data-title="false" data-value="00.00" data-animate-on-init="true" data-animated-value="true" data-min-value="0" data-max-value="220" data-major-ticks="0,20,40,60,80,100,120,140,160,180,200,220"
+                        data-minor-ticks="2" data-stroke-ticks="false" data-highlights='[
+  { "from": 0, "to": 50, "color": "rgba(0,255,0,.15)" },
+  { "from": 50, "to": 100, "color": "rgba(255,255,0,.15)" },
+  { "from": 100, "to": 150, "color": "rgba(255,30,0,.25)" },
+  { "from": 150, "to": 200, "color": "rgba(255,0,225,.25)" },
+  { "from": 200, "to": 220, "color": "rgba(0,0,255,.25)" }
+]' data-color-plate="#000" data-color-major-ticks="#f5f5f5" data-color-minor-ticks="#ddd" data-color-title="#fff" data-color-units="#ccc" data-color-numbers="#eee" data-color-needle-start="rgba(240, 128, 128, 1)" data-color-needle-end="rgba(255, 160, 122, .9)"
+                        data-value-box="true" data-animation-rule="bounce" data-animation-duration="500" data-border-outer-width="3" data-border-middle-width="3" data-border-inner-width="3"></canvas>
+                </div>
+                <div class="d-inline">
+                    <canvas id="angle" data-type="radial-gauge" data-width="120" data-height="120" data-min-value="0" data-max-value="360" data-major-ticks="N,NE,E,SE,S,SW,W,NW,N" data-minor-ticks="22" data-ticks-angle="360" data-start-angle="180" data-stroke-ticks="false"
+                        data-highlights="false" data-color-plate="#33a" data-color-major-ticks="#f5f5f5" data-color-minor-ticks="#ddd" data-color-numbers="#ccc" data-color-needle="rgba(240, 128, 128, 1)" data-color-needle-end="rgba(255, 160, 122, .9)" data-value-box="false"
+                        data-value-text-shadow="false" data-color-circle-inner="#fff" data-color-needle-circle-outer="#ccc" data-needle-circle-size="15" data-needle-circle-outer="false" data-animation-rule="linear" data-needle-type="line" data-needle-start="75"
+                        data-needle-end="99" data-needle-width="3" data-borders="true" data-border-inner-width="0" data-border-middle-width="0" data-border-outer-width="10" data-color-border-outer="#ccc" data-color-border-outer-end="#ccc" data-color-needle-shadow-down="#222"
+                        data-border-shadow-width="0" data-animation-target="plate" data-units="ᵍ" data-title="DIRECTION" data-font-title-size="19" data-color-title="#f5f5f5" data-animation-duration="1500" data-value="0" data-animate-on-init="true"></canvas>
+                </div>
+            </div> -->
+            <!-- <radial-gauge id="speed" [value]="(value | async)" width="150" height="130" units="MPH" min-value="0" start-angle="60" ticks-angle="240" value-box="false" max-value="220" major-ticks="0,20,40,60,80,100,120,140,160,180,200,220" minor-ticks="2" stroke-ticks="true"
+                highlights='[
+    {"from": 160, "to": 220, "color": "rgba(200, 50, 50, .75)"}
+]' color-plate="#fff" border-shadow-width="0" borders="false" needle-type="arrow" needle-width="2" needle-circle-size="7" needle-circle-outer="true" needle-circle-inner="false" animation-duration="1500" animation-rule="linear" animate-on-init="true"
+                class="gauge">
+            </radial-gauge> -->
+            <hr>
+        </div>
+        <h5 class="text-danger">Driver Location</h5>
+        <h5>{{device.formatted_address}}</h5>
+
+        <!-- <ion-item>
+            <ion-label>Speed Unit</ion-label>
+            <ion-select interface="popover" value="mph" (ionChange)="ChangeSpeedUnit($event)">
+                <ion-select-option value="mph" selected>MPH</ion-select-option>
+                <ion-select-option value="kph">KPH</ion-select-option>
+            </ion-select>
+        </ion-item> -->
+        <!-- <div *ngIf="speed_unit=='kph'"> -->
+
+        <!-- </div> -->
+
+        <!-- <radial-gauge *ngIf="speed_unit=='kph'" id="speed" [value]="(value | async)" width="150" height="150" units="Km/Hr" min-value="0" start-angle="60" ticks-angle="240" value-box="false" max-value="220" major-ticks="0,20,40,60,80,100,120,140,160,180,200,220"
+            minor-ticks="2" stroke-ticks="true" highlights='[
+    {"from": 160, "to": 220, "color": "rgba(200, 50, 50, .75)"}
+]' color-plate="#fff" border-shadow-width="0" borders="false" needle-type="arrow" needle-width="2" needle-circle-size="7" needle-circle-outer="true" needle-circle-inner="false" animation-duration="1500" animation-rule="linear" animate-on-init="true"
+            class="gauge">
+        </radial-gauge> -->
+
+    </div>
+    <div class="ion-text-center">
+    </div>
+
+</ion-content>

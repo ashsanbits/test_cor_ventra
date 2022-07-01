@@ -1,0 +1,34 @@
+agm-map {
+    height: 100%;
+    position: relative;
+}
+
+
+@supports (-webkit-touch-callout: none) {
+    /* CSS specific to iOS devices */ 
+    div.bottom {
+        position: fixed;
+        bottom: 50px;
+    }
+  }
+  @supports not (-webkit-touch-callout: none) {
+    /* CSS for other than iOS devices */ 
+    div.bottom {
+        position: fixed;
+        bottom: 10px;
+    }
+  }
+  
+
+.globe-area {
+    position: absolute;
+    width: 100%;
+}
+
+.agm-map-content {
+    display: block !important;
+}
+
+ion-item {
+    width: 100%;
+}

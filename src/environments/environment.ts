@@ -3,7 +3,13 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  // apiUrl: 'https://portal.ventracloud.com/Ventra_Backend/public/api/app/',
+  // imgUrl: 'https://portal.ventracloud.com/Ventra_Backend/'
+  // apiUrl: 'http://localhost:3000/api/app/',
+  // imgUrl: 'http://192.168.241.1/ventrabackend/',
+  apiUrl: 'https://portal.ventracloud.com/api/app/',
+  imgUrl: 'https://portal.ventracloud.com/uploads/',
 };
 
 /*

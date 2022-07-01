@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="tabs/tab1"></ion-back-button>
+        </ion-buttons>
+        <ion-title>Today Events</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div *ngIf="events">
+  <div *ngIf="events.length > 0">
+  <ion-card *ngFor="let event of events" class="ion-padding">
+    <ion-card-title>{{publicEvent(event.appdevid)}}</ion-card-title>
+    <ion-card-subtitle>{{event.eventtime |date:'yyyy-MM-d HH:mm:ss'}}</ion-card-subtitle>
+    <ion-card-subtitle>{{event.loopdata}}</ion-card-subtitle>
+    <ion-card-content>
+        <ion-button *ngIf="event.snap > 0" class="mr-2" color="primary" (click)="eventImage(event)" >Snapshots</ion-button>
+        <ion-button *ngIf="event.download == 3" (click)="download(1,event)" name="download" class="mr-2" color="primary">Ch1</ion-button>
+        <ion-button *ngIf="event.download == 3" (click)="download(2,event)" name="download" class="mr-2" color="primary">Ch2</ion-button>
+    </ion-card-content>
+  </ion-card>
+</div> 
+<div class="ion-text-center" *ngIf="events.length == 0"><h4>No Events Found!!</h4></div>
+</div>
+</ion-content>

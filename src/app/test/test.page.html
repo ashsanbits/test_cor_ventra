@@ -1,0 +1,11 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>test</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <canvas #streaming id="canvas"  width="1920" height="1080" style="display: block; width: 40%;"></canvas>
+    <iframe id='fp_embed_player' src='https://demo.flashphoner.com:8888/embed_player?urlServer=rtsp://demo:demo@ipvmdemo.dyndns.org:5541&streamName=/onvif-media/media.amp?profile=profile_1_h264%26sessiontimeout=60%26streamtype=unicast&mediaProviders=WebRTC,MSE,WSPlayer' marginwidth='0' marginheight='0' frameborder='0' width='100%' height='100%' scrolling='no' allowfullscreen='allowfullscreen'></iframe>
+    <!-- <embed src="{{url}}" width="400" height="300"> -->
+</ion-content>

@@ -1,17 +1,70 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<app-explore-container name="GPS Playback"></app-explore-container>
+<ion-content [fullscreen]="true" #content>
+    <div class="ion-padding">
+        <ion-datetime mode="ios" presentation="date" [(ngModel)]="date" [max]="max" *ngIf="points.length == 0" (ionChange)="dateSelection($event)"></ion-datetime>
+        
+        <div class="form-group mt-3 mb-3" *ngIf="points.length == 0">
+            <ion-item>
+                <ion-label>Start Time</ion-label>
+                <ion-input
+                 readonly
+                  [(ngModel)]="startTime"
+                  id="st_time"
+                  class="ion-text-end"
+                ></ion-input>
+                <ion-popover trigger="st_time" size="fixed">
+                  <ng-template>
+                    <ion-datetime
+                      presentation="time"
+                      [(ngModel)]="st_tame"
+                      (ionChange)="startTimepicker($event)"
+                    ></ion-datetime>
+                  </ng-template>
+                </ion-popover>
+              </ion-item>
+              <ion-item>
+                <ion-label>End Time</ion-label>
+                <ion-input
+                readonly
+                  [(ngModel)]="endTime"
+                      id="et_time"
+                  class="ion-text-end"
+                ></ion-input>
+                <ion-popover trigger="et_time" size="fixed">
+                  <ng-template>
+                    <ion-datetime
+                      presentation="time"
+                      [(ngModel)]="et_tame"
+                      (ionChange)="endTimepicker($event)"
+                    ></ion-datetime>
+                  </ng-template>
+                </ion-popover>
+              </ion-item>
+            <!-- <ion-item (click)="startTimepicker()">
+                <ion-label>Start Time</ion-label>
+                <ion-input readonly [(ngModel)]="startTime" name="start_time"></ion-input>
+            </ion-item> -->
+            <!-- <ion-item (click)="endTimepicker()">
+                <ion-label>End Time</ion-label>
+                <ion-input readonly [(ngModel)]="endTime" name="end_time"></ion-input>
+            </ion-item> -->
+        </div>
+        <div class="form-group  mb-3" *ngIf="points.length == 0">
+            <ion-select interface="popover" class="form-control" placeholder="Select Device" [(ngModel)]="deviceSelected">
+                <ion-select-option *ngFor="let device of devices" value="{{device.deviceid}}">{{device.deviceid}} -{{device.vehicleid}}- {{device.drivername}}</ion-select-option>
+            </ion-select>
+        </div>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+        <button *ngIf=" points.length == 0" (click)="gpsData()" class="btn btn-dark w-100 mb-3" [disabled]="!deviceSelected"><b>Search GPS</b></button>
+        <button *ngIf="points.length > 0" (click)="reload()" class="btn btn-dark w-100 mb-3"><b>New Search</b></button>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+        <div *ngIf="points.length > 0" class="mb-2">
+            <label>Time Selection By Hour</label>
+            <select class="form-control" (change)="hourlyColorPath($event)">
+                <option *ngFor="let t of hours;let i=index" value="{{t}}">{{t}}</option>
+            </select>
+        </div>
+    </div>
+
+    <div #map id="map"></div>
 </ion-content>

@@ -1,0 +1,30 @@
+<app-explore-container name="Event History"></app-explore-container>
+
+
+<ion-content>
+    
+    <form [formGroup]="eventForm" *ngIf="!newSearch" >
+        <ion-datetime mode="ios" presentation="date" formControlName="date" [max]="maxdate"  (ionChange)="dateSelection($event)"></ion-datetime>
+    </form>
+    <div *ngIf="!newSearch">
+        <ion-item>
+            <ion-label>Select Device</ion-label>
+            <ionic-selectable [(ngModel)]="selectedevice" [items]="searchDevices" itemValueField="id" itemTextField="name" [canSearch]="true" (onChange)="portChange($event)">
+            </ionic-selectable>
+        </ion-item>
+        <ion-button expand="full" [disabled]="eventForm.invalid" (click)="searchEvents()">Search</ion-button>
+    </div>
+    <ion-button *ngIf="newSearch" expand="full" (click)="initialize()">New Search</ion-button>
+    <div #content id="content">
+        <ion-card *ngFor="let event of events" class="ion-padding">
+            <ion-card-title>{{publicEvent(event.appdevid)}}</ion-card-title>
+            <ion-card-subtitle>{{event.eventtime |date:'yyyy-MM-d HH:mm:ss'}}</ion-card-subtitle>
+            <ion-card-subtitle>{{event.loopdata}}</ion-card-subtitle>
+            <ion-card-content>
+                <ion-button *ngIf="event.snap > 0" class="mr-2" color="primary" (click)="eventImage(event)" >Snapshots</ion-button>
+                <ion-button *ngIf="event.download == 3" (click)="download(1,event)" name="download" class="mr-2" color="primary">Ch1</ion-button>
+                <ion-button *ngIf="event.download == 3" (click)="download(2,event)" name="download" class="mr-2" color="primary">Ch2</ion-button>
+            </ion-card-content>
+        </ion-card>
+    </div>
+</ion-content>

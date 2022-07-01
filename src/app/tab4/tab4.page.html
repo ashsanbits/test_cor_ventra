@@ -1,0 +1,51 @@
+<app-explore-container name="Settings"></app-explore-container>
+
+<ion-content [fullscreen]="true">
+    <div>
+        <div class="ion-text-center mt-2">
+            <ion-label style="font-size: xx-large;">General Settings</ion-label>
+          </div>
+        <ion-list>
+            <ion-card>
+                <ion-card-header>
+                    <ion-item lines="none" detail (click)="openProfile()">Profile</ion-item>
+                </ion-card-header>
+            </ion-card>
+            <ion-card>
+                <ion-card-header>
+                    <ion-item lines="none">
+                        <ion-label>Speed Unit</ion-label>
+                        <ion-select [(ngModel)]="speedUnit" interface="popover" (ionChange)="changeUnit($event)">
+                            <ion-select-option value="mph">MPH</ion-select-option>
+                            <ion-select-option value="kmh">KPH</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-card-header>
+            </ion-card>
+            <ion-card>
+                <ion-card-header>
+                    <ion-item lines="none">
+                        <ion-label>Event Notification in App</ion-label>
+                        <ion-select multiple="true" interface="popover" [(ngModel)]="event_notification" (ionChange)="changeEventNotification($event)">
+                            <ion-select-option value="13">Overspeed</ion-select-option>
+                            <ion-select-option value="16">G_Sensor</ion-select-option>
+                            <ion-select-option value="31">Ignition On</ion-select-option>
+                            <ion-select-option value="32">Ignition Off</ion-select-option>
+                          </ion-select>
+                    </ion-item>
+                </ion-card-header>
+            </ion-card>
+            <ion-card>
+                <ion-card-header>
+                    <ion-item lines="none">
+                        <ion-label>Overspeed Notification</ion-label>
+                        <ion-select [(ngModel)]="overspeed_notification" interface="popover" (ionChange)="changeSpeedNotification($event)">
+                            <ion-select-option value="1">Yes</ion-select-option>
+                            <ion-select-option value="0">No</ion-select-option>
+                        </ion-select>
+                    </ion-item>
+                </ion-card-header>
+            </ion-card>
+        </ion-list>
+    </div>
+</ion-content>

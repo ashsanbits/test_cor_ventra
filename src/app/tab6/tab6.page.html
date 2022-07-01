@@ -1,0 +1,23 @@
+<app-explore-container name="Remote Playback"></app-explore-container>
+
+
+<ion-content>
+    <ion-item>
+        <ion-label>Select Device</ion-label>
+        <ionic-selectable [items]="searchDevices" itemValueField="id" itemTextField="name" [canSearch]="true" (onChange)="portChange($event)">
+        </ionic-selectable>
+    </ion-item>
+    <div *ngIf="devicesList">
+        <ion-card *ngFor="let device of devicesList; let j = index">
+            <ion-card-header>
+                <ion-card-title *ngIf="device.type == 0">#{{j}} Normal Record</ion-card-title>
+                <ion-card-title *ngIf="device.type == 1">#{{j}} Gsensor</ion-card-title>
+                <ion-card-title *ngIf="device.type == 2">#{{j}} Push Button</ion-card-title>
+            </ion-card-header>
+            <ion-card-content class="text-center">
+                <button class="mb-1 btn btn-outline-danger btn-block" (click)="presentModal(device)">{{converttime(device.start, device.end)}}</button>
+                <button class="btn btn-outline-danger ">{{diferencetime(device.start, device.end)}}</button>
+            </ion-card-content>
+        </ion-card>
+    </div>
+</ion-content>

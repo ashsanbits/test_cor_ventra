@@ -1,0 +1,44 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons>
+            <ion-back-button slot="start" defaultHref="tabs/tab6"></ion-back-button>
+            <ion-title>Remote Download</ion-title>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <ion-item-divider>
+        <ion-label slot="start">Select Minutes</ion-label>
+        <ion-select slot="end" name="minutes" [(ngModel)]="ngMinutes">
+            <ion-select-option value="1">1 min</ion-select-option>
+            <ion-select-option value="2">2 mins</ion-select-option>
+            <ion-select-option value="3">3 mins</ion-select-option>
+            <ion-select-option value="4">4 mins</ion-select-option>
+            <ion-select-option value="5">5 mins</ion-select-option>
+        </ion-select>
+    </ion-item-divider>
+    <ion-item-divider>
+        <ion-label slot="start">Select Channel</ion-label>
+        <ion-select slot="end" name="minutes" [(ngModel)]="ngChannel">
+            <ion-select-option value="1">Channel 1</ion-select-option>
+            <ion-select-option value="2">Channel 2</ion-select-option>=
+        </ion-select>
+    </ion-item-divider>
+    <ion-item-divider>
+        <ion-label slot="start">{{starttime}}</ion-label>
+        <ion-range (ionChange)="changeRange($event)" step="1" min="1" max="{{time}}" color="primary">
+        </ion-range>
+        <ion-label slot="end">{{endtime}}</ion-label>
+    </ion-item-divider>
+    <ion-button expand="block" color="primary" (click)="askForVideo()">
+        <ion-icon name="download" style="margin-bottom: 7px;"></ion-icon> Download Video
+    </ion-button>
+    <!-- <div class="mt-5">
+        <div>
+            <h4><b>Note</b></h4>
+            <h5 style="color: black !important;font-weight: bold !important;">Select browser to download video</h5>
+            <h5 style="color: black !important;font-weight: bold !important;">Upon download completion, Video is saved in your mobile device downloads folder</h5>
+        </div>
+    </div> -->
+</ion-content>

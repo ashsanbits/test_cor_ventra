@@ -1,17 +1,93 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
+<!-- <ion-header class="ion-no-border"> -->
+<!-- <ion-toolbar> -->
+<app-explore-container></app-explore-container>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<!-- <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>Dashboard</ion-title> -->
+<!-- </ion-toolbar> -->
+<!-- </ion-header> -->
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+<ion-content>
+    <ion-popover [isOpen]="isPopoverOpen" backdropDismiss="false" trigger="top-center" side="top" alignment="center">
+        <ng-template>
+            <ion-content class="ion-padding">
+                <h6 style="text-align:left;margin:0px">Vehicle Information</h6>
+                <hr>
+                <div style="text-align:left">
+                    <h6 style="color:red;margin:0px"><b>Driver Name</b></h6>
+                    <h6 style="margin:0px">{{pop_name}}</h6>
+                    <hr>
+                    <h6 style="color:red;margin:0px"><b>Driver Location</b></h6>
+                    <h6 style="margin:0px">{{pop_address}}</h6>
+                    <hr>
+                    <h6 style="color:red;margin:0px"><b>Driver Speed</b></h6>
+                    <h6 >{{pop_speed}} </h6>
+                </div>
+                <ion-button color="primary" (click)="openDetailmodal()">View Details</ion-button>
+                <ion-button color="dark" (click)="closePopover()">Close</ion-button>
+            </ion-content>
+        </ng-template>
+    </ion-popover>
+    <div class="globe-area">
+        <ion-item>
+            <ion-label>View</ion-label>
+            <ion-select interface="popover" [(ngModel)]="style">
+                <ion-select-option value="deviceid">Ventra Device ID</ion-select-option>
+                <ion-select-option value="drivername">Driver</ion-select-option>
+                <ion-select-option value="devicememo">Device Memo</ion-select-option>
+            </ion-select>
+        </ion-item>
+        <ion-item *ngIf="searchDevices.length > 0" style="border-radius: 0 0 16px 16px;">
+            <ion-label>Devices</ion-label>
+            <ion-select interface="popover" (ionChange)="changeDevice($event)">
+                <ion-select-option *ngFor="let device of searchDevices" value="{{device.deviceid}}">{{device.deviceid}}</ion-select-option>
+            </ion-select>
+        </ion-item>
+    </div>
+    <!-- <ion-searchbar placeholder="Search device id"></ion-searchbar> -->
+    <agm-map [latitude]="latitude" [longitude]="longitude" [zoom]="zoom">
+        <div *ngIf="user == 'driver'">
+            <agm-marker id="click-trigger" *ngIf="style == 'deviceid'" [label]="{color: 'white', text: deviceId,fontWeight: 'bold',fontSize: '12px'}" [latitude]="device?.gpsdata?.lat" [longitude]="device?.gpsdata?.lng" [iconUrl]="icon" (markerClick)="deviceDetail(device)">
+            </agm-marker>
+            <agm-marker id="click-trigger" *ngIf="style == 'drivername'" [label]="{color: 'white', text: drivername,fontWeight: 'bold',fontSize: '12px'}" [latitude]="device?.gpsdata?.lat" [longitude]="device?.gpsdata?.lng" [iconUrl]="icon" (markerClick)="deviceDetail(device)">
+            </agm-marker>
+            <agm-marker id="click-trigger" *ngIf="style == 'devicememo'" [label]="{color: 'white', text: vehicleid,fontWeight: 'bold',fontSize: '12px'}" [latitude]="device?.gpsdata?.lat" [longitude]="device?.gpsdata?.lng" [iconUrl]="icon" (markerClick)="deviceDetail(device)">
+            </agm-marker>
+        </div>
+        <div *ngIf="onlineDevices && online">
+            <div *ngIf="style == 'deviceid'">
+                <agm-marker id="click-trigger" *ngFor="let on of onlineDevices" [latitude]="on?.gpsdata?.lat" [longitude]="on?.gpsdata?.lng" [iconUrl]="onDeviceIcon" [label]="{color: 'white', text: on.deviceid,fontWeight: 'bold',fontSize: '12px'}" (markerClick)="deviceDetail(on)">
+                </agm-marker>
+            </div>
+            <div *ngIf="style == 'drivername'">
+                <agm-marker id="click-trigger" *ngFor="let on of onlineDevices" [latitude]="on?.gpsdata?.lat" [longitude]="on?.gpsdata?.lng" [iconUrl]="onDeviceIcon" [label]="{color: 'white', text: on.drivername,fontWeight: 'bold',fontSize: '12px'}" (markerClick)="deviceDetail(on)">
+                </agm-marker>
+            </div>
+            <div *ngIf="style == 'devicememo'">
+                <agm-marker id="click-trigger" *ngFor="let on of onlineDevices" [latitude]="on?.gpsdata?.lat" [longitude]="on?.gpsdata?.lng" [iconUrl]="onDeviceIcon" [label]="{color: 'white', text: on.vehicleid != '' ? on.vehicleid: 'No Memo',fontWeight: 'bold',fontSize: '12px'}" (markerClick)="deviceDetail(on)">
+                </agm-marker>
+            </div>
+        </div>
+        <div *ngIf="offlineDevices && offline">
+            <div *ngIf="style == 'deviceid'">
+                <agm-marker id="click-trigger" *ngFor="let off of offlineDevices" [latitude]="off?.gpsdata?.lat" [longitude]="off?.gpsdata?.lng" [label]="{color: 'white', text: off.deviceid,fontWeight: 'bold',fontSize: '12px'}" [iconUrl]="offDeviceIcon" (markerClick)="deviceDetail(off)">
+                </agm-marker>
+            </div>
+            <div *ngIf="style == 'drivername'">
+                <agm-marker id="click-trigger" *ngFor="let off of offlineDevices" [latitude]="off?.gpsdata?.lat" [longitude]="off?.gpsdata?.lng" [label]="{color: 'white', text: off.drivername,fontWeight: 'bold',fontSize: '12px'}" [iconUrl]="offDeviceIcon" (markerClick)="deviceDetail(off)">
+                </agm-marker>
+            </div>
+            <div *ngIf="style == 'devicememo'">
+                <agm-marker id="click-trigger" *ngFor="let off of offlineDevices" [latitude]="off?.gpsdata?.lat" [longitude]="off?.gpsdata?.lng" [label]="{color: 'white', text: off.vehicleid != '' ? off.vehicleid: 'No Memo' ,fontWeight: 'bold',fontSize: '12px'}" [iconUrl]="offDeviceIcon"
+                    (markerClick)="deviceDetail(off)">
+                </agm-marker>
+            </div>
+        </div>
+    </agm-map>
+    <div class="bottom">
+        <ion-button color="success" [disabled]="online" (click)="changeButtonStatus('on')">Online ({{onlineDevices.length}})</ion-button>
+        <ion-button color="danger" [disabled]="offline" (click)="changeButtonStatus('off')">Offline ({{offlineDevices.length}})</ion-button>
+    </div>
 </ion-content>

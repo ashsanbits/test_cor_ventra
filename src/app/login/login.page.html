@@ -1,0 +1,81 @@
+<ion-content>
+    <!-- after loader -->
+    <div class="red-back-logo pd-default color-white" style="text-align:-webkit-center">
+        <div class="inner-logo"><img src="assets/images/logo-still.svg" alt="VentraApp" /></div>
+    </div>
+    <!-- after loader -->
+
+    <!-- pages wrapper -->
+    <div class="pages-wrapper">
+
+        <!-- separator -->
+        <div class="separator-large"></div>
+        <!-- end separator -->
+
+        <!-- sign in -->
+        <div class="sign in">
+            <div class="container">
+                <form class="form-fill" [formGroup]="loginForm">
+                    <div class="form-wrapper">
+                        <div class="input-wrap">
+                            <input type="email" formControlName="email" placeholder="Email">
+                            <small class="form-text text-danger" *ngIf="!loginForm.get('email').valid && (loginForm.get('email').dirty || loginForm.get('email').touched)">Please enter a valid email!</small>
+                        </div>
+                        <div class="input-wrap">
+                            <input type="password" formControlName="password" placeholder="Password">
+                            <small class="form-text  text-danger" *ngIf="!loginForm.get('password').valid && (loginForm.get('password').dirty || loginForm.get('password').touched)">Password is required</small>
+                        </div>
+                    </div>
+                    <div class="button-default">
+                        <button class="button" [disabled]="loginForm.invalid" (click)="onSubmit()">Sign In</button>
+                    </div>
+                </form>
+
+                <!-- separator -->
+                <div class="separator-medium"></div>
+                <!-- end separator -->
+
+                <div class="link-forgot text-small">
+                    <a (click)="forgotPassword()" class="color-theme">Forgot Password?</a>
+                </div>
+
+                <!-- separator -->
+                <div class="separator-small"></div>
+                <!-- end separator -->
+
+                <!-- <div class="link-sign-up text-small">
+                <p>Don't have an account?<a href="sign-up.html" class="color-theme ml-2">Sign Up</a></p>
+            </div> -->
+
+                <!-- separator -->
+                <div class="separator-large"></div>
+                <!-- end separator -->
+            </div>
+        </div>
+        <!-- end sign in -->
+
+    </div>
+    <!-- end pages wrapper -->
+    <!-- <div class="ion-padding d-flex align-items-center row justify-content-center">
+        <ion-card>
+            <ion-card-header class="ion-text-center">
+                <img src="/assets/logo.png" style="width: 70%;">
+            </ion-card-header>
+            <ion-card-content>
+                <form [formGroup]="loginForm">
+                    <div class="form-group mt-3 mb-3">
+                        <ion-input class="form-control " formControlName="email" placeholder="Username"></ion-input>
+                        <small class="form-text text-danger" *ngIf="!loginForm.get('email').valid && (loginForm.get('email').dirty || loginForm.get('email').touched)">Please enter a valid email!</small>
+                    </div>
+                    <div class="form-group  mb-3">
+                        <ion-input formControlName="password" class="form-control" placeholder="Password" type="password"></ion-input>
+                        <small class="form-text  text-danger" *ngIf="!loginForm.get('password').valid && (loginForm.get('password').dirty || loginForm.get('password').touched)">Password is required</small>
+                    </div>
+
+                    <button class="btn btn-dark w-100 mb-3" [disabled]="loginForm.invalid" (click)="onSubmit()"><b>SIGN IN</b></button>
+                    <ion-label color="primary" (click)="forgotPassword()"><b>Forgot Password</b></ion-label>
+                </form>
+            </ion-card-content>
+        </ion-card>
+    </div> -->
+</ion-content>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "80211034071",
+    "project_id": "ventracloud",
+    "storage_bucket": "ventracloud.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:80211034071:android:90859e7004c5270ab45592",
+        "android_client_info": {
+          "package_name": "com.ventra.app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "80211034071-9so1rgnj1i72t9nst721am4t69s9l1vj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCCqFFhxPVVxxdFpEf5BlYFlwf2_3A-g3c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "80211034071-9so1rgnj1i72t9nst721am4t69s9l1vj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

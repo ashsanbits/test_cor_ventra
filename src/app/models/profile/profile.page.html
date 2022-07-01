@@ -1,0 +1,54 @@
+<!-- <ion-header>
+    <ion-toolbar color="primary">
+        <ion-title slot="start">Edit Profile</ion-title>
+        <ion-buttons slot="end" (click)="closeModal()">
+            <ion-icon name="close"></ion-icon>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header> -->
+<div class="navbar radius-bottom navbar-default navbar-highlight navbar-home">
+    <div class="left">
+        <ion-title class="text-white">Edit Profile</ion-title>
+    </div>
+    <div class="right">
+        <div class="toggle-icon-app"></div>
+        <div class="mode-text">
+            <ion-buttons slot="end" (click)="closeModal()">
+                <ion-icon name="close"></ion-icon>
+            </ion-buttons>
+        </div>
+    </div>
+</div>
+
+<ion-content >
+    <form [formGroup]="profileForm">
+        <ion-card>
+            <ion-card-header>
+                <ion-label style="font-size: large;">Edit Profile</ion-label>
+                <div class="form-group mt-3 mb-3">
+                    <ion-label>Profile Name</ion-label>
+                    <ion-input class="form-control " formControlName="name" placeholder="Profile Name"></ion-input>
+                    <small class="form-text text-danger" *ngIf="!profileForm.get('name').valid && (profileForm.get('name').dirty || profileForm.get('name').touched)">Please
+              enter a Name!</small>
+                </div>
+                <div class="form-group  mb-3">
+                    <ion-label>Email</ion-label>
+                    <ion-input formControlName="email" class="form-control" placeholder="Email" readonly></ion-input>
+                    <small class="form-text  text-danger" *ngIf="!profileForm.get('email').valid && (profileForm.get('email').dirty || profileForm.get('email').touched)">Email is not valid!</small>
+                </div>
+                <div class="form-group  mb-3">
+                    <ion-label>Account Type</ion-label>
+                    <ion-input formControlName="user_type" class="form-control text-capitalize" placeholder="Account Type" readonly></ion-input>
+                </div>
+            <button class="btn btn-dark w-100 mb-3" [disabled]="profileForm.invalid" (click)="updateProfile()"><b>Update Profile</b></button>
+            </ion-card-header>
+        </ion-card>
+        
+        
+        <!-- <div class="form-group  mb-3">
+            <ion-label>Account Type</ion-label>
+            <ion-input readonly formControlName="user_type" class="form-control" placeholder=""></ion-input>
+            <small class="form-text  text-danger" *ngIf="!profileForm.get('user_type').valid && (profileForm.get('user_type').dirty || profileForm.get('user_type').touched)">Email is not valid!</small>
+        </div> -->
+    </form>
+</ion-content>

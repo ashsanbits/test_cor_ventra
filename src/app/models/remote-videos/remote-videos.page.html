@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title slot="start">
+        RemotePlayback Videos
+    </ion-title>
+    <ion-buttons slot="end" (click)="closeModal()">
+        <ion-icon name="close"></ion-icon>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item-sliding *ngFor="let f of files">
+      <ion-item>
+        <ion-icon (click)="openFile(f)" name="videocam" slot="start"></ion-icon>
+        <ion-label class="ion-text-wrap" (click)="openFile(f)">
+          {{ f.name }}
+          <!-- <p>{{ f.fullPath }}</p> -->
+        </ion-label>
+        <ion-button (click)="deleteFile(f)" color="danger">Delete</ion-button>
+      </ion-item>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

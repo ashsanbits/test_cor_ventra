@@ -1,0 +1,36 @@
+<app-explore-container name="Contact Support"></app-explore-container>
+
+
+<ion-content>
+    <div class="pages-wrapper">
+        <!-- sign in -->
+        <div class="sign in">
+            <div class="container">
+                <form class="form-fill" [formGroup]="contactForm">
+                    <div class="form-wrapper">
+                        <div class="input-wrap">
+                            <input formControlName="name" placeholder="Your Name">
+                            <small class="form-text text-danger" *ngIf="!contactForm.get('name').valid && (contactForm.get('name').dirty || contactForm.get('name').touched)">Please enter your name!</small>
+                        </div>
+                        <div class="input-wrap">
+                            <input type="email" formControlName="email" placeholder="Your Email">
+                            <small class="form-text text-danger" *ngIf="!contactForm.get('email').valid && (contactForm.get('email').dirty || contactForm.get('email').touched)">Please enter a valid email!</small>
+                        </div>
+                        <div class="input-wrap">
+                            <input formControlName="subject" placeholder="Subject">
+                            <small class="form-text text-danger" *ngIf="!contactForm.get('subject').valid && (contactForm.get('subject').dirty || contactForm.get('subject').touched)">Please enter your subject!</small>
+                        </div>
+                        <div class="input-wrap">
+                            <textarea formControlName="message" placeholder="Your Message"></textarea>
+                            <small class="form-text text-danger" *ngIf="!contactForm.get('message').valid && (contactForm.get('message').dirty || contactForm.get('message').touched)">Please enter your message!</small>
+                        </div>
+                    </div>
+                    <div class="button-default">
+                        <button class="button" [disabled]="contactForm.invalid" (click)="onSubmit()">Send Email</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+</ion-content>

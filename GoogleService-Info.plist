@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>80211034071-hjbb16a7ma2u737vo1of59me5uqeevmc.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.80211034071-hjbb16a7ma2u737vo1of59me5uqeevmc</string>
+	<key>API_KEY</key>
+	<string>AIzaSyByUaKfle3T35zPELXdmkUGLx2JhbbcJEw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>80211034071</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.ventra.ventracloud</string>
+	<key>PROJECT_ID</key>
+	<string>ventracloud</string>
+	<key>STORAGE_BUCKET</key>
+	<string>ventracloud.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:80211034071:ios:925a4d8120c4dbeab45592</string>
+</dict>
+</plist>
